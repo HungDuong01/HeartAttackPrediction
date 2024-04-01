@@ -12,7 +12,7 @@
 
 /*---------------------------------------------------404 PAGE CSS----------------------------------*/
 
-.not-found-container {
+.not-found-404space {
     width: 100%;
     display: flex;
     overflow: auto;
@@ -21,7 +21,7 @@
     flex-direction: column;
     justify-content: center;
 }
-.not-found-container1 {
+.not-found-404space1 {
     display: flex;
     position: relative;
     align-items: center;
@@ -36,7 +36,7 @@
     margin-bottom: -20px;
     letter-spacing: -20px;
 }
-.not-found-container2 {
+.not-found-404space2 {
     width: 421px;
     display: flex;
     align-items: center;
@@ -54,8 +54,8 @@
 
 body {
     margin: 100px;
-    color: #816a8c;
-    background: url('img/Green\ by\ Design\ -\ HCD\ Magazine.jpeg') no-repeat center center fixed;
+    color: #6f6a8c;
+    background: url(img/Green\ by\ Design\ -\ HCD\ Magazine.jpeg) no-repeat center center fixed;
     background-size: cover;
     font: 600 16px/18px 'Open Sans', sans-serif;
     position: relative;
@@ -98,8 +98,8 @@ a {
 	max-width:525px;
 	min-height:670px;
 	position:relative;
-	background:url(img/Female\ doctor\ stock\ image_\ Image\ of\ girl\,\ lady\,\ health\ -\ 22929877.jpg) no-repeat center;
-	box-shadow:0 12px 15px 0 rgba(255, 101, 227, 0.24),0 17px 50px 0 rgba(255, 23, 228, 0.19);
+	background-color:  #0086C4 no-repeat center;
+	box-shadow:0 12px 15px 0 rgba(109, 101, 255, 0.24),0 17px 50px 0 rgba(255, 23, 228, 0.19);
 }
 .login-html{
 	width:100%;
@@ -140,7 +140,7 @@ a {
 .login-html .sign-in:checked + .tab,
 .login-html .sign-up:checked + .tab{
 	color:#fff;
-	border-color: purple;
+	border-color: #0086C4;
 }
 .login-form{
 	min-height:345px;
@@ -174,7 +174,7 @@ a {
 	font-size:12px;
 }
 .login-form .group .button{
-	background:purple;
+	background:#0086C4;
 }
 .login-form .group label .icon{
 	width:15px;
@@ -208,7 +208,7 @@ a {
 	color:#fff;
 }
 .login-form .group .check:checked + label .icon{
-	background:purple;
+	background:#0086C4;
 }
 .login-form .group .check:checked + label .icon:before{
 	transform:scale(1) rotate(45deg);
@@ -235,7 +235,187 @@ a {
 
 /*---------------------------------------------------HOME PAGE CSS----------------------------------*/
 
+:root {
+  --primary-color: #0086C4;
+  --primary-color-dark: #0086C4;
+  --primary-color-light: #fff;
+  --text-dark: #111827;
+  --text-light: #6b7280;
+  --white: #ffffff;
+}
 
+body{
+    font-family: "Poppins", sans-serif;
+  }
+
+
+.btn {
+  padding: 1rem 2rem;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--white);
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover{
+  background-color: var(--primary-color);
+}
+
+.Wrapper{
+  max-width: 1200px;
+  margin: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav__logo{
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.nav__links{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.link a{
+  text-decoration: none;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.link a:hover {
+  color: var(--primary-color);
+}
+
+.index-header{
+  padding: 0 1rem;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.index-content h1{
+  margin-bottom: 1rem;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.index-content h1 span {
+  font-weight: 400;
+}
+
+.index-content p {
+  margin-bottom: 2rem;
+  color: var(--text-light);
+  line-height: 1.75rem;
+}
+
+.image {
+  position: relative;
+  text-align: center;
+  isolation: isolate;
+}
+
+.image__bg{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 450px;
+  width: 450px;
+  background-color: var(--primary-color);
+  border-radius: 100%;
+  z-index: -1;
+}
+
+.image img{
+  width:100%;
+  max-width: 475px;
+}
+
+
+.service__header {
+  text-align: center;
+  margin-bottom: 20px; /* Adds space between the header and the grid */
+}
+
+.section__header {
+  font-size: 24px;
+  color: #333; /* Dark text color for contrast */
+  margin-bottom: 10px; /* Spacing below the header text */
+}
+
+.service__grid{
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.service__card{
+  padding: 2rem;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.service__card span {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 10px 20px;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  background-color: var(--primary-color-light);
+  border-radius: 100%;
+  transition: 0.3s;
+}
+
+.service__card h4{
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-size: 600;
+  color: var(--text-dark);
+}
+
+.service__card p{
+  margin-bottom: 1rem;
+  color: var(--text-light);
+}
+
+.service__card a {
+  color: var(--primary-color);
+}
+
+.service__card a:hover {
+  color: var(--primary-color-dark);
+}
+
+.service__card:hover span{
+  color: var(--primary-color-light);
+  background-color: var(--primary-color);
+}
 
 
 
@@ -256,7 +436,7 @@ a {
     font-family: "Poppins", sans-serif;
   }
   
-  .container {
+  .Insert-Wrapper {
     position: relative;
     width: 100%;
     padding-top: 100px; /* Adjust this value based on your header's height */
@@ -350,7 +530,7 @@ a {
   .return-button, .record-button {
     background-color: white;
     border: none;
-    color: purple;
+    color: #0086C4;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -361,14 +541,14 @@ a {
   }
   
   .record-button {
-    background-color: purple;
+    background-color: #0086C4;
     color: white;
     margin-left: 20px;
   }
   
   
   button[type="submit"] {
-    background-image: linear-gradient(to right, #5c09b0, #e222c9); /* Gradient purple background */
+    background-image: linear-gradient(to right, #5c09b0, #e222c9); /* Gradient #0086C4 background */
     color: white; /* White text */
     padding: 15px 30px;
     font-size: 16px;
@@ -384,11 +564,11 @@ a {
     outline: none;
   }
   
-  .container.with-image {
+  .Insert-Wrapper.with-image {
     position: relative;
     width: 100%; /* Adjust as needed */
     max-width: 600px; /* Adjust based on the size of your image */
-    margin: auto; /* Center the container */
+    margin: auto; /* Center the Insert-Wrapper */
     justify-content: center; /* Center children horizontally */
     align-items: center; /* Center children vertically */
     text-align: center; /* Ensure text is centered */
@@ -529,7 +709,7 @@ a {
   .return-button, .record-button {
     background-color: white;
     border: none;
-    color: purple;
+    color: #0086C4;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -540,14 +720,14 @@ a {
   }
   
   .record-button {
-    background-color: purple;
+    background-color: #0086C4;
     color: white;
     margin-left: 20px;
   }
   
   
   button[type="submit"] {
-    background-image: linear-gradient(to right, #5c09b0, #e222c9); /* Gradient purple background */
+    background-image: linear-gradient(to right, #5c09b0, #e222c9); /* Gradient #0086C4 background */
     color: white; /* White text */
     padding: 15px 30px;
     font-size: 16px;
@@ -622,7 +802,7 @@ body {
   .return-button {
     background-color: white;
     border: none;
-    color: purple;
+    color: #0086C4;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -639,7 +819,7 @@ body {
     width: 100%;
   }
   .record-button {
-    background-color: purple;
+    background-color: #0086C4;
     color: white;
     padding: 15px 32px;
     text-align: center;
