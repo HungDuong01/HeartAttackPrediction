@@ -11,5 +11,5 @@ views = Blueprint(__name__, 'views')
 #main page
 @views.route('/')
 def index():
-    return render_template('Index.html')
+    return render_template('login.html')
 
