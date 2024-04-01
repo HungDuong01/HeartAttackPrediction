@@ -1,0 +1,141 @@
+<!--!
+    Website Design and Development
+    Created by: Fortune Ogulewe
+    For: Venos Tech
+
+    Copyright © 2024 Venos Tech
+    All rights reserved.
+
+    Description: This document serves as the foundation of our web project,
+    encapsulating the layout and structure necessary for our comprehensive web solution.
+    Through meticulous design and development, this effort contributes towards
+    enhancing the online presence and user experience for Venos Tech.
+
+    Creation Date: March 2024
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="Style.css">
+    <title>Medical Record Entry</title>
+    <link rel="stylesheet" href="Style.css" />
+    <script src="https://kiy.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  
+  <div class="header">
+      <button class="return-button" onclick="location.href='index.html'">Return</button>
+      <h1>Medical Record Entry</h1>
+      
+  </div>
+  <span>
+    <br><br>
+  </span>
+  <div class="container with-image">
+    <img src="img/Female doctor stock image_ Image of girl, lady, health - 22929877.jpg" alt="Descriptive Image Text" class="background-image">
+    <h2 class="home-text04 overlay-text">
+      Embark on a journey of precision and care, weaving individual heart stories into our comprehensive data tapestry. Each entry enhances our mastery of heart health, pushing us closer to breakthroughs in cardiac care. Through diligent data analysis, we aim to optimize heart well-being, crafting a healthier future for all.
+    </h2>
+</div>
+
+
+
+  
+
+
+  <div class="container">
+    
+    <div class="form">
+      <div class="patient-form">
+        <form action="/submit-data-endpoint" method="post">
+        
+        <br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br><br>
+    
+        <label>Sex:</label>
+        <input type="radio" id="male" name="sex" value="Male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="sex" value="Female" required>
+        <label for="female">Female</label><br><br>
+    
+        <label for="cholesterol">Cholesterol:</label>
+        <input type="number" id="cholesterol" name="cholesterol" required><br><br>
+    
+        <label for="heart_rate">Heart Rate:</label>
+        <input type="number" id="heart_rate" name="heart_rate" required><br><br>
+    
+        <label>Diabetes:</label>
+        <input type="radio" id="diabetes_yes" name="diabetes" value="Yes" required>
+        <label for="diabetes_yes">Yes</label>
+        <input type="radio" id="diabetes_no" name="diabetes" value="No" required>
+        <label for="diabetes_no">No</label><br><br>
+    
+        <label>Family History:</label>
+        <input type="radio" id="family_history_yes" name="family_history" value="Yes" required>
+        <label for="family_history_yes">Yes</label>
+        <input type="radio" id="family_history_no" name="family_history" value="No" required>
+        <label for="family_history_no">No</label><br><br>
+    
+        <label>Smoking:</label>
+        <input type="radio" id="smoking_yes" name="smoking" value="Yes" required>
+        <label for="smoking_yes">Yes</label>
+        <input type="radio" id="smoking_no" name="smoking" value="No" required>
+        <label for="smoking_no">No</label><br><br>
+    
+        <label>Obesity:</label>
+        <input type="radio" id="obesity_yes" name="obesity" value="Yes" required>
+        <label for="obesity_yes">Yes</label>
+        <input type="radio" id="obesity_no" name="obesity" value="No" required>
+        <label for="obesity_no">No</label><br><br>
+    
+        <label for="alcohol_consumption">Alcohol Consumption:</label>
+        <input type="number" id="alcohol_consumption" name="alcohol_consumption" required><br><br>
+    
+        <label for="exercise_hours">Exercise Hours Per Week:</label>
+        <input type="number" id="exercise_hours" name="exercise_hours" step="0.1" required><br><br>
+    
+        <label>Previous Heart Problems:</label>
+        <input type="radio" id="previous_heart_problems_yes" name="previous_heart_problems" value="Yes" required>
+        <label for="previous_heart_problems_yes">Yes</label>
+        <input type="radio" id="previous_heart_problems_no" name="previous_heart_problems" value="No" required>
+        <label for="previous_heart_problems_no">No</label><br><br>
+    
+        <label>Medication Use:</label>
+        <input type="radio" id="medication_use_yes" name="medication_use" value="Yes" required>
+        <label for="medication_use_yes">Yes</label>
+        <input type="radio" id="medication_use_no" name="medication_use" value="No" required>
+        <label for="medication_use_no">No</label><br><br>
+    
+        <label for="stress_level">Stress Level:</label>
+        <input type="number" id="stress_level" name="stress_level" required><br><br>
+    
+        <label for="bmi">BMI:</label>
+        <input type="number" id="bmi" name="bmi" step="0.1" required><br><br>
+    
+        <label for="physical_activity_days">Physical Activity Days Per Week:</label>
+        <input type="number" id="physical_activity_days" name="physical_activity_days" required><br><br>
+    
+        <label for="sleep_hours">Sleep Hours Per Day:</label>
+        <input type="number" id="sleep_hours" name="sleep_hours" step="0.1" required><br><br>
+    
+    
+        <label for="systolic_bp">Systolic BP:</label>
+        <input type="number" id="systolic_bp" name="systolic_bp" required><br><br>
+    
+        <label for="diastolic_bp">Diastolic BP:</label>
+        <input type="number" id="diastolic_bp" name="diastolic_bp" required><br><br>
+    
+        <button type="submit">Submit Analysis</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+
+</body>
+</html>
