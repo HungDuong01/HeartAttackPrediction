@@ -20,14 +20,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
+
     <link
     href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="Style.css">
-=======
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Style.css') }}">
->>>>>>> origin/main
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Index.css') }}">
+
     <title>Medical Record Entry</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='Style.css') }}" />
     <script src="https://kiy.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
@@ -41,7 +40,7 @@
                 <li class="link"><a href="">About Us</a></li>
                 <li class="link"><a href="">Services</a></li>
             </ul>
-            <button class="btn">Logout</button>
+            <button class="btn"  onclick="location.href='login-html'">Logout</button>
         </nav>
         <header class="index-header">
             <div class="index-content">
@@ -51,10 +50,6 @@
                     and input heart data for custom insights. With expert care and cutting-edge technology, 
                     start your journey to a healthier heart today.
                 </p>
-            </div>
-            <div class="image">
-                <span class="image"></span>
-                <img src="img/doctorewhite.png" alt="header_image" />
             </div>
         </header>
 
@@ -71,7 +66,7 @@
                         <p>
                             Start your heart attack risk analysis now: Enter your data for personalized, life-saving insights.
                         </p>
-                        <a href="  #   ">Insert Data</a>
+                        <a href="insert-record.html">Insert Data</a>
                     </div>
                     <div class="service__card">
                         <span><i class="ri-eye-line"></i></span>
