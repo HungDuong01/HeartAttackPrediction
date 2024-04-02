@@ -1,0 +1,51 @@
+@import "bourbon";  /* Import Bourbon for mixins (if needed) */
+
+body {
+    background: #eee !important;    /* Light gray background */
+}
+
+.wrapper {  
+    margin-top: 80px;
+    margin-bottom: 80px;  /* Space around the form */
+}
+
+.form-signin {
+    max-width: 380px;  /* Form width */
+    padding: 15px 35px 45px;  /* Form padding */
+    margin: 0 auto;  /* Center the form */
+    background-color: #fff;  /* White background */
+    border: 1px solid rgba(0,0,0,0.1);  /* Thin border */
+
+.form-signin-heading,
+.checkbox {
+        margin-bottom: 30px;  /* Spacing for heading and checkbox */
+    }
+
+.checkbox {
+        font-weight: normal;  /* Normal font weight for readability */
+    }
+
+.form-control {
+        position: relative;
+        font-size: 16px;
+        height: auto;
+        padding: 10px;
+        @include box-sizing(border-box);  /* Ensure padding doesn't affect width */
+
+        &:focus {
+            z-index: 2;  /* Focus style for input fields */
+        }
+    }
+
+    input[type="text"] {
+        margin-bottom: -1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;  /* Border radius for username field */
+    }
+
+    input[type="password"] {
+        margin-bottom: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;  /* Border radius for password fields */
+    }
+}
