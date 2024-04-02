@@ -45,3 +45,22 @@ def signup():
 def home_page():
     
     return render_template('Index.html')
+
+
+#preidction page
+@views.route('/prediction', method=['POST','GET'])
+def prediction():
+    premise_dict = {
+        0: 'Age',
+        1: 'Sex',
+        2: 'Cholesterol',
+        3: 'Heart Rate',
+        4: 'Diabetes',
+        5: 'Smoking',
+        6: 'Obesity',
+        7: 'Alcohol Consumption',
+        8: 'Exercise Hours per Week',
+        9: 'Diet',
+        
+    }
+    return render_template('prediction.html')
