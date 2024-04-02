@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>www.HeartGuard.com</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Style.css') }}">
+</head>
+
+<body>
+    <div class="login-wrap">
+        <div class="login-html">
+                <!-- Sign Up Form -->
+                <form action="{{ url_for("views.signup")}}" method="POST">
+                    <div class="group">
+                        <label for="user-signup" class="label">Username</label>
+                        <input id="user-signup" type="text" class="input">
+                    </div>
+                    <div class="group">
+                        <label for="pass-signup" class="label">Password</label>
+                        <input id="pass-signup" type="password" class="input" data-type="password">
+                    </div>
+                    <div class="group">
+                        <label for="pass-repeat" class="label">Repeat Password</label>
+                        <input id="pass-repeat" type="password" class="input" data-type="password">
+                    </div>
+                    <div class="group">
+                        <label for="email-signup" class="label">Email Address</label>
+                        <input id="email-signup" type="text" class="input">
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Sign Up">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <label for="tab-1">Already Member?</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
