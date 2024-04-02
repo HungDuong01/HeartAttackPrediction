@@ -12,12 +12,15 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 def login():
      if request.method == 'POST':
-        email = request.form.get('email')
+        username = request.form.get('username')
         password = request.form.get('password')
-        user = db.users.find_one({"email": email})
+        user = db.users.find_one({"username": username})
         if user and user['password'] == password:
-            return redirect(url_for('home_page'))  # Redirect to the main page after login
+            return redirect(url_for('views.home_page'))  # Redirect to the main page after login
         else:
+            flash("Invalid credential")
+            flash(username)
+            flash(password)
             return redirect(url_for('views.login'))
      return render_template('login.html')
 #signup page

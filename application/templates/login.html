@@ -10,13 +10,23 @@
     <div class="wrapper">
         <form action="{{ url_for("views.login")}}" method="POST">     
           <h2 class="form-signin-heading">Login</h2>
-          <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
+          <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" />
           <input type="password" class="form-control" name="password" placeholder="Password" required=""/>  
 
           <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
           <p><a href="{{ url_for('views.signup') }}">Sign Up</a></p>
         </form>
       </div>
+    <!-- This is where flash messages will appear -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
 
 </body>
 </html>
