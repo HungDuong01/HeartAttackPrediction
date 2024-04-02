@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 import pymongo as pm
 #from extensions import crimes, crimes_pred
 #from predictions import setup_prediction_model, predict_crime
@@ -12,29 +12,33 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 def login():
      if request.method == 'POST':
-            # Logic for verifying login credentials
         email = request.form.get('email')
         password = request.form.get('password')
-        user = db.users.find_one({"username": email})  # 'users' is the collection name
-        
+        user = db.users.find_one({"email": email})
         if user and user['password'] == password:
             return redirect(url_for('home_page'))  # Redirect to the main page after login
         else:
-            return redirect(url_for('login'))
+            return redirect(url_for('views.login'))
      return render_template('login.html')
 #signup page
 @views.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if request.method == 'POST':
-        username = request.form.get('user-signup')
-        password = request.form.get('pass-signup')
-        email = request.form.get('email-signup')
-        # Insert the new user into the database
-        db.users.insert_one({"username": username, "password": password, "email": email})
-        return redirect(url_for('login'))
-    return redirect(url_for('login'))
+     if request.method == 'POST':
+            username = request.form['username']
+            email = request.form['email']
+            password = request.form['password']
+            confirm_password = request.form['confirmPassword']
+            
+            if password == confirm_password:
+            # Insert the new user into the database
+               db.users.insert_one({"username": username, "email": email, "password": password})
+               return redirect(url_for('views.login'))
+            else:  
+                flash("Password doesn't match")
+                return redirect(url_for('signup'))
+     return render_template('signup.html')
 #home page
 @views.route('/home')
 def home_page():
-   
-    return render_template('index.html')
+    
+    return render_template('Index.html')
