@@ -16,16 +16,16 @@ body {
     background-color: #fff;  /* White background */
     border: 1px solid rgba(0,0,0,0.1);  /* Thin border */
 
-    .form-signin-heading,
-    .checkbox {
+.form-signin-heading,
+.checkbox {
         margin-bottom: 30px;  /* Spacing for heading and checkbox */
     }
 
-    .checkbox {
+.checkbox {
         font-weight: normal;  /* Normal font weight for readability */
     }
 
-    .form-control {
+.form-control {
         position: relative;
         font-size: 16px;
         height: auto;
