@@ -13,9 +13,9 @@ views = Blueprint('views', __name__)
 def login():
      if request.method == 'POST':
             # Logic for verifying login credentials
-        username = request.form.get('user')
-        password = request.form.get('pass')
-        user = db.users.find_one({"username": username})  # 'users' is the collection name
+        email = request.form.get('email')
+        password = request.form.get('password')
+        user = db.users.find_one({"username": email})  # 'users' is the collection name
         
         if user and user['password'] == password:
             return redirect(url_for('home_page'))  # Redirect to the main page after login
