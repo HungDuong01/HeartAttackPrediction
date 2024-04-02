@@ -12,5 +12,4 @@ db_name = "Project"
 client = MongoClient(MONGO_URI)
 db = client[db_name]  # Use the database name you want to connect to.
 if __name__ == '__main__':
-    app.secret_key = "esof_3675"
     app.run(debug=True)

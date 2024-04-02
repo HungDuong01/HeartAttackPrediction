@@ -35,7 +35,7 @@ def signup():
                return redirect(url_for('views.login'))
             else:  
                 flash("Password doesn't match")
-                return redirect(url_for('signup'))
+                return redirect(url_for('views.signup'))
      return render_template('signup.html')
 #home page
 @views.route('/home')
