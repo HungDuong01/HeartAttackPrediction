@@ -10,6 +10,6 @@ app = Flask(__name__)
 MONGO_URI = 'mongodb+srv://cduong:Hungyeuem2001@cluster0.gu7twaw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 
 client = MongoClient(MONGO_URI)
-db = client.test  # Use the database name you want to connect to.
+db = client.Project  # Use the database name you want to connect to.
 if __name__ == '__main__':
     app.run(debug=True)
