@@ -39,7 +39,7 @@ textarea {
 .form {
   width: 100%;
   max-width: 820px;
-  height: 850px;
+  height: 1040px;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 0 20px 1px rgba(91, 77, 242, 0.1);
@@ -182,6 +182,22 @@ button[type="submit"]:focus {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow for depth */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
 }
+textarea#result {
+  width: 100%; /* Ensures the textarea stretches to the full width of its container */
+  padding: 0.6rem 1.2rem; /* Provides internal space around the text */
+  border: 2px solid #f1f1f1; /* Sets the border color and thickness */
+  background: none; /* Maintains a transparent background */
+  color: #441940; /* Text color */
+  font-family: "Poppins", sans-serif; /* Matches the font style of your input fields */
+  border-radius: 25px; /* Rounds the corners of the textarea */
+  transition: border-color 0.3s; /* Smooth transition for border color on focus */
+}
+
+textarea#result:focus {
+  border-color: #2819ff; /* Changes the border color when the textarea is focused */
+  outline: none; /* Removes the default focus outline to rely on the border color change */
+}
+
     </style>
 
 
@@ -192,7 +208,7 @@ button[type="submit"]:focus {
 <body>
   
   <div class="header">
-    <a class='btn btn-primary' href="{{ url_for('views.home_page') }}">Home</a>
+      <button class="return-button" onclick="location.href='Index.html'">Return</button>
       <h1>Predict Data</h1>
       
   </div>
@@ -204,11 +220,13 @@ button[type="submit"]:focus {
     
     <div class="form">
       <div class="patient-form">
-        <form action="/submit-data-endpoint" method="post">
+        <form action="{{ url_for("views.predict")}}" method="post">
         
         <br>
+        <h1>Input user data to predict if user is at risk of heart attack</h1><br><br>
+
         <label for="age">Age:</label>
-        <input type="number" id="age" name="age" required><br><br>
+        <input type="number" id="age" name="age" min="0" max="100"required><br><br>
     
         <label>Sex:</label>
         <input type="radio" id="male" name="sex" value="Male" required>
@@ -217,10 +235,10 @@ button[type="submit"]:focus {
         <label for="female">Female</label><br><br>
     
         <label for="cholesterol">Cholesterol:</label>
-        <input type="number" id="cholesterol" name="cholesterol" required><br><br>
+        <input type="number" id="cholesterol" name="cholesterol" min="40" max="300"required><br><br>
     
         <label for="heart_rate">Heart Rate:</label>
-        <input type="number" id="heart_rate" name="heart_rate" required><br><br>
+        <input type="number" id="heart_rate" name="heart_rate" min="40" max="120"required><br><br>
     
         <label>Diabetes:</label>
         <input type="radio" id="diabetes_yes" name="diabetes" value="Yes" required>
@@ -247,10 +265,13 @@ button[type="submit"]:focus {
         <label for="obesity_no">No</label><br><br>
     
         <label for="alcohol_consumption">Alcohol Consumption:</label>
-        <input type="number" id="alcohol_consumption" name="alcohol_consumption" required><br><br>
-    
+        <input type="radio" id="alCon_yes" name="alcohol_consumption" value="Yes" required>
+        <label for="obesity_yes">Yes</label>
+        <input type="radio" id="alCon_no" name="alcohol_consumption" value="No" required>
+        <label for="obesity_no">No</label><br><br>
+
         <label for="exercise_hours">Exercise Hours Per Week:</label>
-        <input type="number" id="exercise_hours" name="exercise_hours" step="0.1" required><br><br>
+        <input type="number" id="exercise_hours" name="exercise_hours" step="0.5" min="0" max="168"required><br><br>
     
         <label>Previous Heart Problems:</label>
         <input type="radio" id="previous_heart_problems_yes" name="previous_heart_problems" value="Yes" required>
@@ -265,25 +286,30 @@ button[type="submit"]:focus {
         <label for="medication_use_no">No</label><br><br>
     
         <label for="stress_level">Stress Level:</label>
-        <input type="number" id="stress_level" name="stress_level" required><br><br>
+        <input type="number" id="stress_level" name="stress_level" min="0" max="100"required><br><br>
     
         <label for="bmi">BMI:</label>
-        <input type="number" id="bmi" name="bmi" step="0.1" required><br><br>
+        <input type="number" id="bmi" name="bmi" step="0.1" min="17" max="50"required><br><br>
     
         <label for="physical_activity_days">Physical Activity Days Per Week:</label>
-        <input type="number" id="physical_activity_days" name="physical_activity_days" required><br><br>
+        <input type="number" id="physical_activity_days" name="physical_activity_days" min="0" max="7"required><br><br>
     
         <label for="sleep_hours">Sleep Hours Per Day:</label>
-        <input type="number" id="sleep_hours" name="sleep_hours" step="0.1" required><br><br>
+        <input type="number" id="sleep_hours" name="sleep_hours" step="0.1" min="0" max="12"required><br><br>
     
     
         <label for="systolic_bp">Systolic BP:</label>
-        <input type="number" id="systolic_bp" name="systolic_bp" required><br><br>
+        <input type="number" id="systolic_bp" name="systolic_bp" min="90" max="300"required><br><br>
     
         <label for="diastolic_bp">Diastolic BP:</label>
-        <input type="number" id="diastolic_bp" name="diastolic_bp" required><br><br>
+        <input type="number" id="diastolic_bp" name="diastolic_bp" min="70" max="200"required><br><br>
     
-        <button type="submit">Submit Analysis</button>
+        <label for="result">Result:</label>
+        <textarea id="result" name="result" rows="4" placeholder="" readonly>
+          {{ result }}
+        </textarea><br><br>
+        
+        <button type="submit">Predict Data</button>
         </form>
       </div>
     </div>

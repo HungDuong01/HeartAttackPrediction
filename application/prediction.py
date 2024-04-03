@@ -14,6 +14,6 @@ def setup_prediction_model(target, non_target):
     return dt
 
 # perform prediction given an input
-def predict_heartRisk(input, dt):
+def predictHeartRisk(input, dt):
     prediction = dt.predict(input)
     return prediction

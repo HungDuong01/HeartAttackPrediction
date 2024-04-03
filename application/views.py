@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 import pymongo as pm
 import pandas as pd
 import joblib
-from prediction import setup_prediction_model,predict_heartRisk
+from prediction import setup_prediction_model,predictHeartRisk
 from connection import db
 from pandas import DataFrame
 from datetime import datetime
@@ -117,10 +117,24 @@ def predict():
                            'Diastolic_BP':[dia_BP],
                            'Sex_Cat':[sexCate]
                            })
-           # Create DataFrame from user input
-        user_df = pd.DataFrame([user_input])
-
-    
+        
+        # fetching data from database
+        dataset = DataFrame(list(db.heartAttackPrediction.find()))
+        dataset = dataset.drop(['_id',''], axis=1)
+        targetCol = ['Heart Attack Risk']
+        
+        # prediction model
+        predictionModel = setup_prediction_model(dataset[targetCol], dataset.drop(targetCol, axis=1))
+        prediction = predictHeartRisk(user_input, predictionModel)
+        result = []
+        
+        # prediction display
+        if prediction [0] == 1:
+            result = 'High risk of heart attack'
+        else:
+            result = 'Low to No risk of heart attack'
+            
+        return render_template('predictions.html', result=result)
     return render_template('predict.html')
 
 #insert records page
@@ -205,7 +219,7 @@ def search():
                     }
                 }
             ]
-            results = list(collection.aggregate(pipeline))
+            results = list(db.heartAttackPrediction.aggregate(pipeline))
 
             # Render the template with the search results
             return render_template('search_results.html', results=results)
