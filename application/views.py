@@ -20,8 +20,6 @@ def login():
             return redirect(url_for('views.home_page'))  # Redirect to the main page after login
         else:
             flash("Invalid credential")
-            flash(username)
-            flash(password)
             return redirect(url_for('views.login'))
      return render_template('login.html')
 #signup page
@@ -49,8 +47,8 @@ def home_page():
 
 
 #preidction page
-@views.route('/prediction', method=['POST','GET'])
-def prediction():
+@views.route('/predict', methods=['POST','GET'])
+def predict():
     premise_dict = {
         0: 'Age',
         1: 'Cholesterol',
@@ -118,4 +116,96 @@ def prediction():
         user_df = pd.DataFrame([user_input])
 
     
-    return render_template('prediction.html')
+    return render_template('predict.html')
+
+#insert records page
+@views.route('/insert-record', methods = ['GET', 'POST'])
+def insert_page():
+    if request.method == 'POST':
+        # Get form data
+        record = {
+            "age": request.form['age'],
+            "sex": request.form['sex'],
+            "cholesterol": request.form['cholesterol'],
+            "heart_rate": request.form['heart_rate'],
+            "diabetes": request.form['diabetes'],
+            "family_history": request.form['family_history'],
+            "smoking": request.form['smoking'],
+            "obesity": request.form['obesity'],
+            "alcohol_consumption": request.form['alcohol_consumption'],
+            "exercise_hours": request.form['exercise_hours'],
+            "previous_heart_problems": request.form['previous_heart_problems'],
+            "medication_use": request.form['medication_use'],
+            "stress_level": request.form['stress_level'],
+            "bmi": request.form['bmi'],
+            "physical_activity_days": request.form['physical_activity_days'],
+            "sleep_hours": request.form['sleep_hours'],
+            "systolic_bp": request.form['systolic_bp'],
+            "diastolic_bp": request.form['diastolic_bp']
+        }
+
+        # Insert record into MongoDB heartAttackPrediction collection
+        db.heartAttackPrediction.insert_one(record)
+
+        return redirect(url_for('views.home_page'))
+    else:
+        return render_template('insert-record.html')
+    
+@views.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        # Extract and convert the age range and sex from the form data
+        # For simplicity, we're assuming age is directly usable as an integer
+        try:
+            age_min = int(request.form.get('age_min', 0))
+            age_max = int(request.form.get('age_max', 100))
+            sex = request.form['sex']
+        except ValueError as e:
+            # Handle case where the conversion fails
+            return f"Invalid input for age. Error: {str(e)}"
+
+        try:
+            # Aggregation pipeline to match criteria and join collections
+            pipeline = [
+                {
+                    '$match': {
+                        'age': {'$gt': age_min, '$lt': age_max},
+                        'sex': sex
+                    }
+                },
+                {
+                    '$lookup': {
+                        'from': 'patient_details',  # The collection to join
+                        'localField': 'PatientID',  # Field in this collection
+                        'foreignField': 'PatientID',  # Field in the collection to join
+                        'as': 'details'  # Alias for the output array
+                    }
+                },
+                {
+                    '$unwind': '$details'  # Deconstructs the array
+                },
+                {
+                    '$project': {
+                        'age': 1,
+                        'sex': 1,
+                        'PatientID': 1,
+                        'Details': '$details'
+                    }
+                }
+            ]
+            results = list(collection.aggregate(pipeline))
+
+            # Render the template with the search results
+            return render_template('search_results.html', results=results)
+        except Exception as e:
+            # Handle errors during the search process
+            return f"An error occurred during the search: {str(e)}"
+    
+    # Display the search form for GET requests
+    return render_template('search.html')
+
+# Define the search_results route if needed for additional processing or a separate results page
+@views.route('/search_results', methods=['POST'])
+def search_results():
+    # This function can be similar to the '/search' POST handler, or used for different form submissions
+    pass
