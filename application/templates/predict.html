@@ -208,7 +208,7 @@ textarea#result:focus {
 <body>
   
   <div class="header">
-      <button class="return-button" onclick="location.href='Index.html'">Return</button>
+    <a class='btn btn-primary' href="{{ url_for('views.home_page') }}">Home</a>
       <h1>Predict Data</h1>
       
   </div>
@@ -235,7 +235,7 @@ textarea#result:focus {
         <label for="female">Female</label><br><br>
     
         <label for="cholesterol">Cholesterol:</label>
-        <input type="number" id="cholesterol" name="cholesterol" min="40" max="300"required><br><br>
+        <input type="number" id="cholesterol" name="cholesterol" min="40" max="500"required><br><br>
     
         <label for="heart_rate">Heart Rate:</label>
         <input type="number" id="heart_rate" name="heart_rate" min="40" max="120"required><br><br>
