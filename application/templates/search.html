@@ -142,11 +142,11 @@ nav {
     <nav>
         <div class="nav__logo">HeartGuard</div>
         <ul class="nav__links">
-            <li class="link"><a href="index.html">Home</a></li>  
+            <li class="link"><a href="{{ url_for('views.home_page') }}">Home</a></li>  
             <li class="link"><a href="#">About</a></li>
             <li class="link"><a href="#">Service</a></li>
         </ul>
-        <button class="btn" onclick="location.href='login.html'">Logout</button>
+        <a class='btn btn-primary' href="{{ url_for('views.login') }}">Log Out</a>
     </nav>
   </div>
   <br>

@@ -223,10 +223,11 @@ textarea#result:focus {
         <form action="{{ url_for("views.predict")}}" method="post">
         
         <br>
-        <h1>Input user data to predict if user is at risk of heart attack</h1><br><br>
+        <h1>Insertion data form</h1><br><br>
 
         <label for="age">Age:</label>
-        <input type="number" id="age" name="age" min="0" max="100"required><br><br>
+        <input type="number" id="age" name="age" min="0" max="100" required>
+        <span>(0-100)</span><br><br>
     
         <label>Sex:</label>
         <input type="radio" id="male" name="sex" value="Male" required>
@@ -235,10 +236,12 @@ textarea#result:focus {
         <label for="female">Female</label><br><br>
     
         <label for="cholesterol">Cholesterol:</label>
-        <input type="number" id="cholesterol" name="cholesterol" min="40" max="500"required><br><br>
-    
+        <input type="number" id="cholesterol" name="cholesterol" min="40" max="300"required>
+        <span>(40-300 mg/dL)</span><br><br>
+
         <label for="heart_rate">Heart Rate:</label>
-        <input type="number" id="heart_rate" name="heart_rate" min="40" max="120"required><br><br>
+        <input type="number" id="heart_rate" name="heart_rate" min="40" max="120"required>
+        <span>(40-120 bpm)</span><br><br>
     
         <label>Diabetes:</label>
         <input type="radio" id="diabetes_yes" name="diabetes" value="Yes" required>
@@ -271,7 +274,9 @@ textarea#result:focus {
         <label for="obesity_no">No</label><br><br>
 
         <label for="exercise_hours">Exercise Hours Per Week:</label>
-        <input type="number" id="exercise_hours" name="exercise_hours" step="0.5" min="0" max="168"required><br><br>
+        <input type="number" id="exercise_hours" name="exercise_hours" min="0" max="168"required>
+        <span>(0-168 hours)</span><br><br>
+
     
         <label>Previous Heart Problems:</label>
         <input type="radio" id="previous_heart_problems_yes" name="previous_heart_problems" value="Yes" required>
@@ -286,23 +291,28 @@ textarea#result:focus {
         <label for="medication_use_no">No</label><br><br>
     
         <label for="stress_level">Stress Level:</label>
-        <input type="number" id="stress_level" name="stress_level" min="0" max="100"required><br><br>
-    
+        <input type="number" id="stress_level" name="stress_level" min="0" max="10"required>
+        <span>(0-10)</span><br><br>
+
         <label for="bmi">BMI:</label>
-        <input type="number" id="bmi" name="bmi" step="0.1" min="17" max="50"required><br><br>
-    
+        <input type="number" id="bmi" name="bmi" step="0.1" min="17" max="50"required>
+        <span>(17-50)</span><br><br>
+
         <label for="physical_activity_days">Physical Activity Days Per Week:</label>
-        <input type="number" id="physical_activity_days" name="physical_activity_days" min="0" max="7"required><br><br>
+        <input type="number" id="physical_activity_days" name="physical_activity_days" min="0" max="7"required>
+        <span>(0-7 days)</span><br><br>
     
         <label for="sleep_hours">Sleep Hours Per Day:</label>
-        <input type="number" id="sleep_hours" name="sleep_hours" step="0.1" min="0" max="12"required><br><br>
-    
+        <input type="number" id="sleep_hours" name="sleep_hours" step="0.1" min="0" max="12"required>
+        <span>(0-12 hrs)</span><br><br>
     
         <label for="systolic_bp">Systolic BP:</label>
-        <input type="number" id="systolic_bp" name="systolic_bp" min="90" max="300"required><br><br>
+        <input type="number" id="systolic_bp" name="systolic_bp" min="90" max="300"required>
+        <span>(90-300)</span><br><br>
     
         <label for="diastolic_bp">Diastolic BP:</label>
-        <input type="number" id="diastolic_bp" name="diastolic_bp" min="70" max="200"required><br><br>
+        <input type="number" id="diastolic_bp" name="diastolic_bp" min="70" max="200"required>
+        <span>(70-200)</span><br><br>
     
         <label for="result">Result:</label>
         <textarea id="result" name="result" rows="4" placeholder="" readonly>
