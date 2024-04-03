@@ -127,26 +127,32 @@ def predict():
 @views.route('/insert-record', methods = ['GET', 'POST'])
 def insert_page():
     if request.method == 'POST':
+        # Convert "Yes" to 1 and "No" to 0 for relevant fields
+        def convert_to_int(value):
+            return 1 if value == "Yes" else 0
+        # Convert Male and Female to 1 and 0
+        def convert_sex_int(value):
+            return 1 if value =="Male" else 0
         # Get form data
         record = {
-            "age": request.form['age'],
-            "sex": request.form['sex'],
-            "cholesterol": request.form['cholesterol'],
-            "heart_rate": request.form['heart_rate'],
-            "diabetes": request.form['diabetes'],
-            "family_history": request.form['family_history'],
-            "smoking": request.form['smoking'],
-            "obesity": request.form['obesity'],
-            "alcohol_consumption": request.form['alcohol_consumption'],
-            "exercise_hours": request.form['exercise_hours'],
-            "previous_heart_problems": request.form['previous_heart_problems'],
-            "medication_use": request.form['medication_use'],
-            "stress_level": request.form['stress_level'],
-            "bmi": request.form['bmi'],
-            "physical_activity_days": request.form['physical_activity_days'],
-            "sleep_hours": request.form['sleep_hours'],
-            "systolic_bp": request.form['systolic_bp'],
-            "diastolic_bp": request.form['diastolic_bp']
+            "Age": int(request.form['age']),
+            "Cholesterol": int(request.form['cholesterol']),
+            "Heart_rate": int(request.form['heart_rate']),
+            "Diabetes": convert_to_int(request.form['diabetes']),
+            "Family_history": convert_to_int(request.form['family_history']),
+            "Smoking": convert_to_int(request.form['smoking']),
+            "Obesity": convert_to_int(request.form['obesity']),
+            "Alcohol_consumption": int(request.form['alcohol_consumption']),
+            "Exercise_hours": int(request.form['exercise_hours']),
+            "Previous_heart_problems": convert_to_int(request.form['previous_heart_problems']),
+            "Medication_use": convert_to_int(request.form['medication_use']),
+            "Stress_level": convert_to_int(request.form['stress_level']),
+            "Bmi": int(request.form['bmi']),
+            "Physical_activity_days": int(request.form['physical_activity_days']),
+            "Sleep_hours": int(request.form['sleep_hours']),
+            "Systolic_bp": int(request.form['systolic_bp']),
+            "Diastolic_bp": int(request.form['diastolic_bp']),
+            "Sex_cat": convert_sex_int((request.form['sex'])),
         }
 
         # Insert record into MongoDB heartAttackPrediction collection
@@ -155,7 +161,8 @@ def insert_page():
         return redirect(url_for('views.home_page'))
     else:
         return render_template('insert-record.html')
-    
+
+ 
 @views.route('/search', methods=['GET', 'POST'])
 def search():
     if request.method == 'POST':
