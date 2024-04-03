@@ -16,12 +16,14 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 def login():
      if request.method == 'POST':
+        # Login logic to check the user credential
         username = request.form.get('username')
         password = request.form.get('password')
         user = db.users.find_one({"username": username})
         if user and user['password'] == password:
             return redirect(url_for('views.home_page'))  # Redirect to the main page after login
         else:
+            # Else display error msg and render the login page 
             flash("Invalid credential")
             return redirect(url_for('views.login'))
      return render_template('login.html')
@@ -30,23 +32,25 @@ def login():
 @views.route('/signup', methods=['GET', 'POST'])
 def signup():
      if request.method == 'POST':
+            # Get user info from the page
             username = request.form['username']
             email = request.form['email']
             password = request.form['password']
             confirm_password = request.form['confirmPassword']
             
+            # Signup logic
             if password == confirm_password:
-            # Insert the new user into the database
+            # Insert the new user into the database, if only the confirm pass matches with the pass
                db.users.insert_one({"username": username, "email": email, "password": password})
                return redirect(url_for('views.login'))
             else:  
-                flash("Password doesn't match")
-                return redirect(url_for('views.signup'))
+                flash("Password doesn't match") # Display error message
+                return redirect(url_for('views.signup')) # Render the signup page again
      return render_template('signup.html')
 #home page
 @views.route('/home')
 def home_page():
-    
+    # Render the home page 
     return render_template('Index.html')
 
 #preidction page
@@ -82,15 +86,17 @@ def predict():
                     'Sex_Cat': convert_sex_int((request.form['sex'])),  # Handle as categorical
                     }])
         
-        # fetching data from database
+        # Fetching data from database
         dataset = DataFrame(list(db.mydata.find()))
         dataset = dataset.drop(['_id'], axis=1)
+        # Drop the target value
         targetCol = 'Heart Attack Risk'  
         y = dataset[targetCol]
         X = dataset.drop(targetCol, axis=1)
-        # prediction model
+        # Prediction model
         predictionModel = setup_prediction_model(X,y)
         prediction = predictHeartRisk(user_input, predictionModel)
+        
         # Determine the result based on the prediction 
         if prediction[0] == 1: 
             result = 'High risk of heart attack'
