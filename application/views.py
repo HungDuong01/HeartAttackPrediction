@@ -45,6 +45,11 @@ def home_page():
     
     return render_template('Index.html')
 
+@views.route('/visualize')
+def visualize():
+    
+    return render_template('visualize.html')
+
 
 #preidction page
 @views.route('/predict', methods=['POST','GET'])

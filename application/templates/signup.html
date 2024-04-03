@@ -122,17 +122,18 @@ button{
 
         <input type="email" class="form-control" name="email" placeholder="Email Address" required="" />  <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
         <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required="" /> 
+        <!-- This is where flash messages will appear -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
     </form>
-    <!-- This is where flash messages will appear -->
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul class="flashes">
-    {% for message in messages %}
-        <li>{{ message }}</li>
-    {% endfor %}
-        </ul>
-    {% endif %}
-    {% endwith %}
+    
 </body>
 </html>
