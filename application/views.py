@@ -146,44 +146,37 @@ def insert_page():
         return render_template('insert-record.html')
 
 # Search page  
-@views.route('/search', methods=['POST'])
+@views.route('/search', methods=['POST','GET'])
 def search():
-    # Retrieve form data
-    age_min = int(request.form.get('age_min', 0))
-    age_max = int(request.form.get('age_max', 100))
-    sex = request.form.get('sex', 'Any')  # Default to 'Any' if not provided
-    diabetes = request.form.get('diabetes', 'Any')
-    obesity = request.form.get('obesity', 'Any')
-    prevHeartDis = request.form.get('prevHD', 'Any')
-    medicationUse = request.form.get('medUse', 'Any')
-    
-    # Convert sex into the format stored in your database
-    sex_query = 1 if sex == 'Male' else 0 if sex == 'Female' else None
-    diabetes_query = 1 if diabetes == 'Yes' else 0 if diabetes == 'No' else None
-    obesity_query = 1 if obesity == 'Yes' else 0 if obesity == 'No' else None
-    prevHeartDis_query = 1 if prevHeartDis == 'Yes' else 0 if prevHeartDis == 'No' else None
-    medicationUse_query = 1 if medicationUse == 'Yes' else 0 if medicationUse == 'No' else None
+     if request.method == 'POST':
+         # Convert "Yes" to 1 and "No" to 0 for relevant fields
+            def convert_to_int(value):
+                return 1 if value == "Yes" else 0
+            # Convert Male and Female to 1 and 0
+            def convert_sex_int(value):
+                return 1 if value =="Male" else 0
+            
+            age_min = request.form.get('ageMin', type=int) or 0
+            age_max = request.form.get('ageMax', type=int) or 120
+            diabetes_status = convert_to_int(request.form.get('diabetes'))
+            sex = convert_sex_int(request.form.get('sex'))
+            obesity_status = convert_to_int(request.form.get('obesity'))
 
-    # Construct query dictionary, excluding unspecified attributes
-    query = {'age': {'$gte': age_min, '$lte': age_max}}
-    if sex_query is not None:
-        query['sex'] = sex_query
-    if diabetes_query is not None:
-        query['diabetes'] = diabetes_query
-    if obesity_query is not None:
-        query['obesity'] = obesity_query
-    if prevHeartDis_query is not None:
-        query['prevHeartDis'] = prevHeartDis_query
-    if medicationUse_query is not None:
-        query['medicationUse'] = medicationUse_query
+            query = {'$and': [{'Age': {'$gte': age_min}}, {'Age': {'$lte': age_max}}]}
 
-    try:
-        results = list(db.heartAttackPrediction.find(query))
-        return render_template('search.html', results=results)
-    except Exception as e:
-        return f"An error occurred during the search: {str(e)}", 500
-
-#####
+            if diabetes_status in ['1', '0']:
+                query['$and'].append({'Diabetes': diabetes_status})
+            
+            if sex in ['1', '0']:
+                query['$and'].append({'Sex': sex})
+            
+            if obesity_status in ['1', '0']:
+                query['$and'].append({'Obesity': obesity_status})
+            
+            results = list(db.heartAttackPrediction.find(query))
+            return render_template('search.html', rows=results)
+     return render_template('search.html', rows=[])
+   
 
 #Visualize page
 @views.route('/visualize', methods=['GET', 'POST'])

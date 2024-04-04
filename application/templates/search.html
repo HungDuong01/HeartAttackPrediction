@@ -13,29 +13,30 @@
   }
 
   .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Adjust this */
-  text-align: center;
-  background-color: #0086C4;
-  color: white;
-  padding: 20px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-}
-
-
-.header-content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adjust this */
+    text-align: center;
+    background-image: linear-gradient(310deg, rgb(45, 40, 202), rgb(124, 172, 235));
+    color: white;
+    padding: 20px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
+  
+  
+  .header-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
 
 
 .header h1{
@@ -121,63 +122,40 @@
   transform: translateX(-100px); /* Shifts the h1 element 20px to the left */
 }
 
-
-
-
-
 </style>
 </head>
-
-<div class="header">
-  <a class='btn btn-primary' href="{{ url_for('views.home_page') }}">Home</a>
-  <h1>Search Data</h1>
-  
-</div>
-<span>
-<br><br>
-</span>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
 
 
 
 <body>
-  <div class="Wrapper">
-    <div class="navigation">
-      <h2>Search Data </h2>
-      <div>
+    <div class="header">
+      <a class='btn btn-primary' href="{{ url_for('views.home_page') }}">Home</a>
+      <h1>Search Data</h1>
+    </div>
+    <br><br><br><br><br><br> <!-- Adjust the number of <br> based on your header height -->
+  
+    <div class="Wrapper">
+      <div class="navigation">
+        <h2>Search Data </h2>
+        <form action="{{ url_for('views.search') }}" method="post">
           <label for="ageMin">Minimum Age:</label>
-          <input type="number" id="ageMin" name="ageMin" required><br><br>
-
-          
-
-
+          <input type="number" id="ageMin" name="ageMin"><br><br>
+  
           <label for="ageMax">Maximum Age:</label>
-          <input type="number" id="ageMax" name="ageMax" required><br><br>
-
-          
-
+          <input type="number" id="ageMax" name="ageMax"><br><br>
+  
           <label>Diabetes:</label>
           <input type="radio" id="diabetesYes" name="diabetes" value="Yes">
           <label for="diabetesYes">Yes</label>
           <input type="radio" id="diabetesNo" name="diabetes" value="No">
           <label for="diabetesNo">No</label><br><br>
-
-          
-
+  
           <label>Sex:</label>
           <input type="radio" id="sexMale" name="sex" value="Male">
           <label for="sexMale">Male</label>
           <input type="radio" id="sexFemale" name="sex" value="Female">
           <label for="sexFemale">Female</label><br><br>
-
-          
-
+  
           <label>Obesity:</label>
           <input type="radio" id="obesityYes" name="obesity" value="Yes">
           <label for="obesityYes">Yes</label>
@@ -185,60 +163,65 @@
           <label for="obesityNo">No</label><br><br>
           
           <button class="searchButton">Search</button>
+        </form>
       </div>
-    </div>
-
-    <div class="content-wrapper">
-      <h1>Search Results</h1>
-      <div id="result-space">
+  
+      <div class="content-wrapper">
+        <h1>Search Results</h1>
+        <div id="result-space">
           <table>
             <thead>
               <tr>
-                  <th>Age</th>
-                  <th>Cholesterol (mg/dL)</th>
-                  <th>Heart Rate (bpm)</th>
-                  <th>Diabetes</th>
-                  <th>Family History</th>
-                  <th>Smoking</th>
-                  <th>Obesity</th>
-                  <th>Alcohol Consumption</th>
-                  <th>Exercise Hours (per week)</th>
-                  <th>Previous Heart Problems</th>
-                  <th>Medication Use</th>
-                  <th>Stress Level</th>
-                  <th>BMI</th>
-                  <th>Physical Activity Days (per week)</th>
-                  <th>Sleep Hours (per night)</th>
-                  <th>Systolic BP (mmHg)</th>
-                  <th>Diastolic BP (mmHg)</th>
-                  <th>Sex</th>
+                <th>Age</th>
+                <th>Sex</th>
+                <th>Cholesterol (mg/dL)</th>
+                <th>Heart Rate (bpm)</th>
+                <th>Diabetes</th>
+                <th>Family History</th>
+                <th>Smoking</th>
+                <th>Obesity</th>
+                <th>Alcohol Consumption</th>
+                <th>Exercise Hours (per week)        </th>
+                <th>Diet</th>
+                <th>Previous Heart Problems</th>
+                <th>Medication Use</th>
+                <th>Stress Level</th>
+                <th>BMI</th>
+                <th>Physical Activity Days (per week)</th>
+                <th>Sleep Hours (per night)</th>
+                <th>Systolic BP (mmHg)</th>
+                <th>Diastolic BP (mmHg)</th>
               </tr>
-          </thead>
-              
-          <tr>
-            <td></td> <!-- Age -->
-            <td></td> <!-- Cholesterol -->
-            <td></td> <!-- Heart Rate -->
-            <td></td> <!-- Diabetes -->
-            <td></td> <!-- Family History -->
-            <td></td> <!-- Smoking -->
-            <td></td> <!-- Obesity -->
-            <td></td> <!-- Alcohol Consumption -->
-            <td></td> <!-- Exercise Hours -->
-            <td></td> <!-- Previous Heart Problems -->
-            <td></td> <!-- Medication Use -->
-            <td></td> <!-- Stress Level -->
-            <td></td> <!-- BMI -->
-            <td></td> <!-- Physical Activity Days -->
-            <td></td> <!-- Sleep Hours -->
-            <td></td> <!-- Systolic BP -->
-            <td></td> <!-- Diastolic BP -->
-            <td></td> <!-- Sex -->
-        </tr>
+            </thead>
+            <tbody>
+              {% for row in rows %}
+              <tr>
+                <td>{{ row.get('Age', '') }}</td>
+                <td>{{ row.get('Sex', '') }}</td>
+                <td>{{ row.get('Cholesterol', '') }}</td>
+                <td>{{ row.get('Heart Rate', '') }}</td>
+                <td>{{ row.get('Diabetes', '') }}</td>
+                <td>{{ row.get('Family History', '') }}</td>
+                <td>{{ row.get('Smoking', '') }}</td>
+                <td>{{ row.get('Obesity', '') }}</td>
+                <td>{{ row.get('Alcohol Consumption', '') }}</td>
+                <td>{{ row.get('Exercise Hours Per Week', '') }}</td>
+                <td>{{ row.get('Diet', '') }}</td>
+                <td>{{ row.get('Previous Heart Problems', '') }}</td>
+                <td>{{ row.get('Medication Use', '') }}</td>
+                <td>{{ row.get('Stress Level', '') }}</td>
+                <td>{{ row.get('BMI', '') }}</td>
+                <td>{{ row.get('Physical Activity Days Per Week', '') }}</td>
+                <td>{{ row.get('Sleep Hours Per Day', '') }}</td>
+                <td>{{ row.get('Systolic_BP', '') }}</td>
+                <td>{{ row.get('Diastolic_BP', '') }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
           </table>
+        </div>
       </div>
+  
     </div>
-
-  </div>
-</body>
-</html>
+  </body>
+  </html>
