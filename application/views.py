@@ -158,7 +158,7 @@ def search():
                 return 1 if value =="Male" else 0
             # Convert Male and Female to 1 and 0
             def convert_sort_int(value):
-                return 1 if value =="Ascending" else -1
+                return 1 if value == "Ascending" else -1 if value == "Descending" else None
             
             age_min = request.form.get('ageMin', type=int) or 0
             age_max = request.form.get('ageMax', type=int) or 120
@@ -191,18 +191,13 @@ def search():
                 
                 
             # If the user click on the sort by age option, then assign the sorting to query
-            if sort_order:
-                if sort_order == 1:
-                    sort_direction = 1  # Var to direct the order of the data
-                elif sort_order == -1:
-                    sort_direction = -1 # Var to direct the order of the data
-                    
-                results = list(db.searchData.find(query).sort('Age', sort_direction))
-                return render_template('search.html', rows=results)
+            if sort_order is not None:
+                results = list(db.searchData.find(query).sort('Age', sort_order))
             else:
                 results = list(db.searchData.find(query))
-                return render_template('search.html', rows=results)
-            
+                
+            return render_template('search.html', rows=results)
+        
      return render_template('search.html', rows=[])
    
 
