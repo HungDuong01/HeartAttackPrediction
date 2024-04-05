@@ -167,16 +167,11 @@ def search():
             sex = convert_sex_int(request.form.get('sex'))
             obesity_status = convert_to_int(request.form.get('obesity'))
             sort_order = convert_sort_int(request.form.get('sort'))
-            
-            #######
-            # sort_by_order: ascending or descending
-            # if sort_by_order in [asc, desc] 
-            #     results = list(db.heartAttackPrediction.find(query)).sort({Age: 1})
-            #######
+                     
             # Constructing the base query
             query = {'$and': []}
         
-        # Adding age filters
+            # Adding age filters
             if age_min or age_max:
                 query['$and'].append({'Age': {'$gte': age_min}})
                 query['$and'].append({'Age': {'$lte': age_max}})
@@ -193,20 +188,21 @@ def search():
             
             if obesity_status in ['1', '0']:
                 query['$and'].append({'Obesity': obesity_status})
-            # Handling sorting
-            if sort_order in ['1', '-1']:
-                if sort_order == 1:
-                    sort_direction = 1  # Change to descending if selected
-                elif sort_order == -1:
-                    sort_direction = -1
-                results = list(db.searchData.find(query).sort('Age', sort_direction))
                 
-            # Avoiding an empty '$and' clause
-            # if not query['$and']:
-            #     del query['$and']
+                
+            # If the user click on the sort by age option, then assign the sorting to query
+            if sort_order:
+                if sort_order == 1:
+                    sort_direction = 1  # Var to direct the order of the data
+                elif sort_order == -1:
+                    sort_direction = -1 # Var to direct the order of the data
+                    
+                results = list(db.searchData.find(query).sort('Age', sort_direction))
+                return render_template('search.html', rows=results)
+            else:
+                results = list(db.searchData.find(query))
+                return render_template('search.html', rows=results)
             
-            results = list(db.searchData.find(query))
-            return render_template('search.html', rows=results)
      return render_template('search.html', rows=[])
    
 

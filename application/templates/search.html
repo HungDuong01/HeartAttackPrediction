@@ -217,6 +217,7 @@
                 <th>BMI</th>
                 <th>Physical Activity Days (per week)</th>
                 <th>Sleep Hours (per night)</th>
+                <th>Heart Attack Risk</th>
                 <th>Systolic BP (mmHg)</th>
                 <th>Diastolic BP (mmHg)</th>
               </tr>
@@ -228,21 +229,22 @@
                 <td>{{ row.get('Age', '') }}</td>
                 <td>{{ row.get('Sex', '') }}</td>
                 <td>{{ row.get('Cholesterol', '') }}</td>
-                <td>{{ row.get('Heart_rate', '') }}</td>
+                <td>{{ row.get('Heart Rate', '') }}</td>
                 <td>{{ row.get('Diabetes', '') }}</td>
-                <td>{{ row.get('Family_history', '') }}</td>
+                <td>{{ row.get('Family History', '') }}</td>
                 <td>{{ row.get('Smoking', '') }}</td>
                 <td>{{ row.get('Obesity', '') }}</td>
-                <td>{{ row.get('Alcohol_consumption', '') }}</td>
-                <td>{{ row.get('Exercise_hours', '') }}</td>
-                <td>{{ row.get('Previous_heart_problems', '') }}</td>
-                <td>{{ row.get('Medication_use', '') }}</td>
-                <td>{{ row.get('Stress_level', '') }}</td>
-                <td>{{ row.get('Bmi', '') }}</td>
-                <td>{{ row.get('Physical_activity_days', '') }}</td>
-                <td>{{ row.get('Sleep_hours', '') }}</td>
-                <td>{{ row.get('Systolic_bp', '') }}</td>
-                <td>{{ row.get('Diastolic_bp', '') }}</td>
+                <td>{{ row.get('Alcohol Consumption', '') }}</td>
+                <td>{{ row.get('Exercise Hours Per Week', '') }}</td>
+                <td>{{ row.get('Previous Heart Problems', '') }}</td>
+                <td>{{ row.get('Medication Use', '') }}</td>
+                <td>{{ row.get('Stress Level', '') }}</td>
+                <td>{{ row.get('BMI', '') }}</td>
+                <td>{{ row.get('Physical Activity Days Per Week', '') }}</td>
+                <td>{{ row.get('Sleep Hours Per Day', '') }}</td>
+                <td>{{ row.get('Heart Attack Risk', '') }}</td>
+                <td>{{ row.get('Systolic_BP', '') }}</td>
+                <td>{{ row.get('Diastolic_BP', '') }}</td>
               </tr>
               {% endfor %}
             </tbody>
