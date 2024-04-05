@@ -118,7 +118,9 @@ def insert_page():
             return 1 if value =="Male" else 0
         # Get form data
         record = {
+            "Patient ID": request.form['pid'],
             "Age": int(request.form['age']),
+            "Sex": convert_sex_int((request.form['sex'])),
             "Cholesterol": int(request.form['cholesterol']),
             "Heart_rate": int(request.form['heart_rate']),
             "Diabetes": convert_to_int(request.form['diabetes']),
@@ -135,11 +137,10 @@ def insert_page():
             "Sleep_hours": int(request.form['sleep_hours']),
             "Systolic_bp": int(request.form['systolic_bp']),
             "Diastolic_bp": int(request.form['diastolic_bp']),
-            "Sex_cat": convert_sex_int((request.form['sex'])),
         }
 
         # Insert record into MongoDB heartAttackPrediction collection
-        db.heartAttackPrediction.insert_one(record)
+        db.searchData.insert_one(record)
 
         return redirect(url_for('views.home_page'))
     else:
@@ -149,20 +150,40 @@ def insert_page():
 @views.route('/search', methods=['POST','GET'])
 def search():
      if request.method == 'POST':
-         # Convert "Yes" to 1 and "No" to 0 for relevant fields
+            # Convert "Yes" to 1 and "No" to 0 for relevant fields
             def convert_to_int(value):
                 return 1 if value == "Yes" else 0
             # Convert Male and Female to 1 and 0
             def convert_sex_int(value):
                 return 1 if value =="Male" else 0
+            # Convert Male and Female to 1 and 0
+            def convert_sort_int(value):
+                return 1 if value =="Ascending" else -1
             
             age_min = request.form.get('ageMin', type=int) or 0
             age_max = request.form.get('ageMax', type=int) or 120
+            patient_id = request.form.get('pID')
             diabetes_status = convert_to_int(request.form.get('diabetes'))
             sex = convert_sex_int(request.form.get('sex'))
             obesity_status = convert_to_int(request.form.get('obesity'))
-
-            query = {'$and': [{'Age': {'$gte': age_min}}, {'Age': {'$lte': age_max}}]}
+            sort_order = convert_sort_int(request.form.get('sort'))
+            
+            #######
+            # sort_by_order: ascending or descending
+            # if sort_by_order in [asc, desc] 
+            #     results = list(db.heartAttackPrediction.find(query)).sort({Age: 1})
+            #######
+            # Constructing the base query
+            query = {'$and': []}
+        
+        # Adding age filters
+            if age_min or age_max:
+                query['$and'].append({'Age': {'$gte': age_min}})
+                query['$and'].append({'Age': {'$lte': age_max}})
+        
+            # Adding patient ID filter if provided
+            if patient_id:
+                query['$and'].append({'Patient ID': patient_id})
 
             if diabetes_status in ['1', '0']:
                 query['$and'].append({'Diabetes': diabetes_status})
@@ -172,8 +193,15 @@ def search():
             
             if obesity_status in ['1', '0']:
                 query['$and'].append({'Obesity': obesity_status})
+            # Handling sorting
+            sort_direction = 1  # Default to ascending
+            if sort_order == 'Descending':
+                sort_direction = -1  # Change to descending if selected
+            # Avoiding an empty '$and' clause
+            # if not query['$and']:
+            #     del query['$and']
             
-            results = list(db.heartAttackPrediction.find(query))
+            results = list(db.searchData.find(query).sort('Age', sort_direction))
             return render_template('search.html', rows=results)
      return render_template('search.html', rows=[])
    
@@ -187,12 +215,16 @@ def visualize():
         '$and': [
             {'Age': {'$gt': 10}},  # Specify condition for 'Age' greater than 10
             {'Sleep Hours Per Day': {'$gt': 1}},  # Specify condition for 'Sleep Hours Per Day' greater than 4
-            {'Heart Rate': {'$gt': 30}}  # Specify condition for 'Heart Rate' greater than 30
+            {'Heart Rate': {'$lt': 100}}  # Specify condition for 'Heart Rate' greater than 30
         ]
     }, {'_id': 0, 'Age': 1, 'Sleep Hours Per Day': 1, 'Heart Rate': 1})
+    
+    age_data = db.heartAttackPrediction.find({'Age': {'$gt': 10}}, {'Age': 1})
+    
 
     # Convert the retrieved data to a pandas DataFrame
     dataset = pd.DataFrame(list(data))
+    dataset_age = pd.DataFrame(list(age_data))
     
     #Chart for Age
     # Define parameters for the plot
@@ -205,7 +237,7 @@ def visualize():
     angle = 0  # Adjust the angle if needed
 
     # Generate plot using get_plot function from graphs.py
-    age_plot = get_plot(dataset['Age'], kind, title, xlabel, ylabel, sort, limit, angle)
+    age_plot = get_plot(dataset_age['Age'], kind, title, xlabel, ylabel, sort, limit, angle)
 
     #Chart for Sleep Hours
     # Define parameters for the sleep hours per day plot

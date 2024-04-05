@@ -210,6 +210,9 @@ button[type="submit"]:focus {
         <form action="/insert-record" method="post">
         
         <br>
+        <label for="pid">Patient ID:</label>
+        <input type="text" id="pid" name="pid" required><br><br>
+        
         <label for="age">Age:</label>
         <input type="number" id="age" name="age" min="0" max="100" required>
         <span>(0-100)</span><br><br>
@@ -221,12 +224,12 @@ button[type="submit"]:focus {
         <label for="female">Female</label><br><br>
     
         <label for="cholesterol">Cholesterol:</label>
-        <input type="number" id="cholesterol" name="cholesterol" min="40" max="300"required>
-        <span>(40-300 mg/dL)</span><br><br>
+        <input type="number" id="cholesterol" name="cholesterol" min="40" max="500"required>
+        <span>(40-500 mg/dL)</span><br><br>
 
         <label for="heart_rate">Heart Rate:</label>
-        <input type="number" id="heart_rate" name="heart_rate" min="40" max="120"required>
-        <span>(40-120 bpm)</span><br><br>
+        <input type="number" id="heart_rate" name="heart_rate" min="40" max="200"required>
+        <span>(40-200 bpm)</span><br><br>
     
         <label>Diabetes:</label>
         <input type="radio" id="diabetes_yes" name="diabetes" value="Yes" required>
