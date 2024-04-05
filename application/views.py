@@ -194,14 +194,18 @@ def search():
             if obesity_status in ['1', '0']:
                 query['$and'].append({'Obesity': obesity_status})
             # Handling sorting
-            sort_direction = 1  # Default to ascending
-            if sort_order == 'Descending':
-                sort_direction = -1  # Change to descending if selected
+            if sort_order in ['1', '-1']:
+                if sort_order == 1:
+                    sort_direction = 1  # Change to descending if selected
+                elif sort_order == -1:
+                    sort_direction = -1
+                results = list(db.searchData.find(query).sort('Age', sort_direction))
+                
             # Avoiding an empty '$and' clause
             # if not query['$and']:
             #     del query['$and']
             
-            results = list(db.searchData.find(query).sort('Age', sort_direction))
+            results = list(db.searchData.find(query))
             return render_template('search.html', rows=results)
      return render_template('search.html', rows=[])
    
